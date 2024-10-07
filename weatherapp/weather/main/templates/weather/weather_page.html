@@ -1,0 +1,29 @@
+{% extends 'weather/wrapper.html' %}
+
+{% block weather %}
+    <div class="conteiner d-flex justify-content-center align-item-center m-5">
+        <form method="POST"class= "w-50 d-flex flex-row">
+            {% csrf_token %}
+
+            <input type="text" class="form-control" name="city" placeholder="write city name..">
+            <button class="btn btn-primary" value="submit">Add city</button>
+        </form>
+    </div>
+
+    <div class="conteiner">
+            <div class="row w-100 d-flex flex-columnn justify-content-center align-item-center">
+                {% for weather in weather_data %}
+                    <div class="col-8 w-auto m-4 pe-4 d-flex flex-row border border-light rounded">    
+                        <div>
+                            <img src="http://openweathermap.org/img/w/{{ weather.icon}}.png">
+                        </div>
+                     
+                    <div>
+                        <div><h2>{{weather.desc}}</h2></div>
+                        <div><p>{{weather.city}} --- {{weather.temp}} F </p></div>
+                    </div>
+                 </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
